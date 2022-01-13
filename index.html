@@ -7,24 +7,23 @@
     <title>Code Quiz</title>
     <link rel="stylesheet" href="assets/style.css" />
   </head>
-  <br>
+
     <header>
-      <span id="highscores">Highscores</span><span id="timer">Time: 75</span>
-      <h1>Code Quiz</h1>
-      
+      <span id="highscores">Highscores</span><span id="timer">Time: <span id="timeRemaining"></span></span>
+      <h1>Code Quiz</h1> 
     </header>
 
-    <section class="question">
-      <p>
-        Try to answer the upcoming questions as quickly as you can to achieve the highest score.<br> Be careful though as incorrect answers remove 10 seconds off of the timer and will therefore greatly
-        reduce your score.
-      </p>
+    <div class="container"> 
+      <div id="question">
+        Try to answer the upcoming questions as quickly as you can to achieve the highest score.<br> Be careful though as incorrect answers remove 10 seconds off of the timer and will therefore reduce your score.<br><br>Good luck!
+      </div>
+      <div id="answers"></div>
       <br>
-      <p>Good luck!</p>
       <br>
-      <button>Click to begin</button>
-    </section>
+      <button id="startQuiz">Click to begin</button>
+    </div>
 
     <script src="assets/script.js"></script>
+
   </body>
 </html>
