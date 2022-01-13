@@ -49,6 +49,7 @@ function startTimer() {
   }, 1000);
 }
 
+// this function begins the quiz and starts the timer at the click of the button
 function startQuiz() {
   startQuizBtnEl.classList.add('hide');
   updateTimeRemainingEl();
@@ -56,8 +57,10 @@ function startQuiz() {
   nextQuestion();
 }
 
+// event listener to run the nextQuestion function when an answer is clicked
 answersEl.addEventListener('click', nextQuestion);
 
+// function to check if users answer is not the same as the correct answer, if it is not the same then 10 seconds are deducted from the timer/score
 function checkAnswer(userAnswer) {
   var correctAnswer = questions[questionIndex].correctAnswer;
   console.log(correctAnswer);
@@ -67,6 +70,7 @@ function checkAnswer(userAnswer) {
   }
 }
 
+// this function displays the next question when an answer is selcted from the current question
 function nextQuestion(event) {
   if (event) {
     var userChoice = event.target.textContent;
@@ -82,6 +86,7 @@ function nextQuestion(event) {
   updateAnswersUi();
 }
 
+// this function creates an ordered list of the individual answers so that I can specify which answer was clicked
 function updateAnswersUi() {
   answersEl.innerHTML = '';
   var orderedList = document.createElement('ol');
@@ -94,9 +99,11 @@ function updateAnswersUi() {
   answersEl.append(orderedList);
 }
 
+// function to end the game
 function endGame() {
   questionEL.textContent = 'You finished the quiz!';
   answersEl.classList.add('hide');
 }
 
+// event listener to run the startQuiz function when the start quiz button is clicked
 startQuizBtnEl.addEventListener('click', startQuiz);
