@@ -1,5 +1,16 @@
 body {
   text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  background-color: snow;
+}
+
+header {
+  padding: 15px;
+  border-style: ridge;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: black;
+  background-color: deepskyblue;
 }
 
 header h1 {
@@ -7,15 +18,49 @@ header h1 {
   margin-right: auto;
 }
 
+#answers ol li {
+  list-style: none;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#highscoresContainer {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  border-style: ridge;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: black;
+  background-color: deepskyblue;
+  max-width: 60vw;
+  max-height: 60vh;
+}
+
+#highscoresContainer ol li {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 30vw;
+  max-height: 30vh;
+}
+
 #highscores {
-  position: absolute;
-  top: 8px;
-  left: 16px;
+  color: snow;
+  background-color: dodgerblue;
+  position: fixed;
+  top: 20px;
+  left: 32px;
+  border-color: black;
+  border-style: ridge;
+  border-width: 2px;
+  border-radius: 3px;
+  padding: 3px;
 }
 
 #timer {
   position: absolute;
-  top: 8px;
+  top: 20px;
   right: 16px;
 }
 
@@ -25,4 +70,52 @@ header h1 {
 
 .show {
   display: contents;
+}
+
+#container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10vh;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: black;
+  border-style: ridge;
+  padding: 10px;
+  background-color: deepskyblue;
+  max-width: 60vw;
+}
+
+#answers li {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 600px;
+  margin: 10px;
+  padding: 10px;
+  border-color: black;
+  border-style: ridge;
+  border-width: 2px;
+  border-radius: 3px;
+  color: black;
+  background-color: dodgerblue;
+}
+
+#startQuizBtn {
+}
+
+#scoresForm {
+}
+
+#initials {
+}
+
+#submitScoreBtn {
+}
+
+#refreshAndClearBtns {
+}
+
+#refreshBtn {
+}
+
+#clearBtn {
 }

@@ -1,17 +1,20 @@
-var startQuizBtnEl = document.getElementById('startQuiz');
+var startQuizBtnEl = document.getElementById('startQuizBtn');
 var questionEL = document.getElementById('question');
 var answersEl = document.getElementById('answers');
 var timeRemainingEl = document.getElementById('timeRemaining');
 var timerEl = document.getElementById('timer');
 var scoresFormEl = document.getElementById('scoresForm');
-var submitScoreBtnEl = document.getElementById('submitScore');
+var submitScoreBtnEl = document.getElementById('submitScoreBtn');
 var initialsInput = document.getElementById('initials');
 var highScoresLinkEl = document.getElementById('highscores');
 var highScoresCont = document.getElementById('highscoresContainer');
+var backToStartEl = document.getElementById('refreshBtn');
+var clearHighscoresEl = document.getElementById('clearBtn');
+var containerEl = document.getElementById('container');
 
 var questions = [
   {
-    question: 'Commonnly used data types DO NOT include:',
+    question: 'Commonly used data types DO NOT include:',
     answers: ['booleans', 'strings', 'numbers', 'alerts'],
     correctAnswer: 'alerts',
   },
@@ -54,8 +57,8 @@ function startTimer() {
       timeRemaining = 0;
       endGame();
       clearInterval(timer);
-      timeRemaining--;
     }
+    timeRemaining--;
     updateTimeRemainingEl();
   }, 1000);
 }
@@ -136,20 +139,33 @@ function submitScore(event) {
   scoresFormEl.classList.remove('show');
   var userScore = {
     userInitials: initialsInput.value,
-    score: timeRemaining,
+    score: (timeRemaining += 1),
   };
 
   highScores.push(userScore);
   localStorage.setItem('highScores', JSON.stringify(highScores));
+  showHighScores();
 }
 
+// function to show highScores leaderboard in order (highest to lowest)
 function showHighScores() {
   highScoresCont.classList.remove('hide');
   highScoresCont.innerHTML = '';
+  timerEl.innerHTML = '';
+  timeRemainingEl.innerHTML = '';
+  answersEl.innerHTML = '';
+  questionEL.innerHTML = '';
+  startQuizBtnEl.classList.add('hide');
+  backToStartEl.classList.remove('hide');
+  clearHighscoresEl.classList.remove('hide');
+  containerEl.classList.add('hide');
   function scoreSorting(a, b) {
     return b.score - a.score;
   }
   highScores.sort(scoreSorting);
+  var highscoresTitle = document.createElement('h2');
+  highscoresTitle.textContent = 'Highscores';
+  highScoresCont.append(highscoresTitle);
   var orderedList = document.createElement('ol');
   for (var i = 0; i < highScores.length && i < 10; i++) {
     var listItem = document.createElement('li');
@@ -159,10 +175,17 @@ function showHighScores() {
   highScoresCont.append(orderedList);
 }
 
+// function to clear highScores and refresh page
+function clearHighScores() {
+  localStorage.clear();
+  location.reload();
+}
+
 // function that takes the userScore object and returns a string
 function createHighScoreString(highScore) {
   return highScore.userInitials + '-------------' + highScore.score;
 }
+
 // event listener to run the startQuiz function when the button is clicked
 startQuizBtnEl.addEventListener('click', startQuiz);
 // event listener to run the nextQuestion function when an answer is clicked
@@ -171,3 +194,5 @@ answersEl.addEventListener('click', nextQuestion);
 submitScoreBtnEl.addEventListener('click', submitScore);
 // event listener to run the showHighScores function when the link is clicked
 highScoresLinkEl.addEventListener('click', showHighScores);
+// event listener to run the clearHighScores function when the link is clicked
+clearHighscoresEl.addEventListener('click', clearHighScores);

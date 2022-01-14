@@ -5,33 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Code Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/style.css" />
   </head>
 
+  <body>
     <header>
       <span id="highscores">Highscores</span><span id="timer">Time remaining: <span id="timeRemaining">50</span> seconds</span>
-      <h1>Code Quiz</h1> 
+      <h1>Code Quiz</h1>
     </header>
 
-    <div class="container"> 
+    <div id="container">
       <div id="question">
-        Try to answer the upcoming questions as quickly as you can to achieve the highest score.<br> Be careful though as incorrect answers remove 10 seconds off of the timer and will therefore reduce your score.<br><br>Good luck!
+        Try to answer the upcoming questions as quickly as you can to achieve the highest score.<br />
+        Be careful though as incorrect answers remove 10 seconds off of the timer and will therefore reduce your score.<br /><br />Good luck!
       </div>
       <div id="answers"></div>
-      <br>
-      <br>
-      <button id="startQuiz">Click to begin</button>
+      <br />
+      <br />
+      <button id="startQuizBtn">Click to begin</button>
       <form id="scoresForm" class="hide">
         <label>Enter initials here:</label>
-        <input type="text" id="initials">
-        <button id="submitScore">Submit score</button>
+        <input type="text" id="initials" />
+        <button id="submitScoreBtn">Submit score</button>
       </form>
     </div>
-    <div id="highscoresContainer" class="hide">
-      <h2>Highscores</h2>
+    <div id="highscoresContainer" class="hide"></div>
+    <div id="refreshAndClearBtns">
+      <button id="refreshBtn" class="hide" onClick="window.location.href=window.location.href">Back to start</button>
+      <button id="clearBtn" class="hide">Clear Highscores</button>
     </div>
 
     <script src="assets/script.js"></script>
-
   </body>
 </html>
