@@ -9,7 +9,7 @@
   </head>
 
     <header>
-      <span id="highscores">Highscores</span><span id="timer">Time: <span id="timeRemaining"></span></span>
+      <span id="highscores">Highscores</span><span id="timer">Time remaining: <span id="timeRemaining">50</span> seconds</span>
       <h1>Code Quiz</h1> 
     </header>
 
@@ -21,6 +21,14 @@
       <br>
       <br>
       <button id="startQuiz">Click to begin</button>
+      <form id="scoresForm" class="hide">
+        <label>Enter initials here:</label>
+        <input type="text" id="initials">
+        <button id="submitScore">Submit score</button>
+      </form>
+    </div>
+    <div id="highscoresContainer" class="hide">
+      <h2>Highscores</h2>
     </div>
 
     <script src="assets/script.js"></script>

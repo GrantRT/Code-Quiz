@@ -22,3 +22,7 @@ header h1 {
 .hide {
   display: none;
 }
+
+.show {
+  display: contents;
+}

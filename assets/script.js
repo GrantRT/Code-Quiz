@@ -2,6 +2,12 @@ var startQuizBtnEl = document.getElementById('startQuiz');
 var questionEL = document.getElementById('question');
 var answersEl = document.getElementById('answers');
 var timeRemainingEl = document.getElementById('timeRemaining');
+var timerEl = document.getElementById('timer');
+var scoresFormEl = document.getElementById('scoresForm');
+var submitScoreBtnEl = document.getElementById('submitScore');
+var initialsInput = document.getElementById('initials');
+var highScoresLinkEl = document.getElementById('highscores');
+var highScoresCont = document.getElementById('highscoresContainer');
 
 var questions = [
   {
@@ -32,18 +38,23 @@ var questions = [
 ];
 
 var questionIndex = -1;
-var timeRemaining = 100;
+var timeRemaining = 50;
 
+// this function displays the time remaining
 function updateTimeRemainingEl() {
   timeRemainingEl.textContent = timeRemaining;
 }
 // this function is to start counting down the timer and end game if it reaches 0
 function startTimer() {
   var timer = setInterval(function () {
-    timeRemaining--;
+    if (questionIndex >= questions.length) {
+      clearInterval(timer);
+    }
     if (timeRemaining <= 0) {
+      timeRemaining = 0;
       endGame();
       clearInterval(timer);
+      timeRemaining--;
     }
     updateTimeRemainingEl();
   }, 1000);
@@ -57,15 +68,16 @@ function startQuiz() {
   nextQuestion();
 }
 
-// event listener to run the nextQuestion function when an answer is clicked
-answersEl.addEventListener('click', nextQuestion);
-
 // function to check if users answer is not the same as the correct answer, if it is not the same then 10 seconds are deducted from the timer/score
 function checkAnswer(userAnswer) {
   var correctAnswer = questions[questionIndex].correctAnswer;
   console.log(correctAnswer);
   if (userAnswer != correctAnswer) {
-    timeRemaining -= 10;
+    if (timeRemaining > 10) {
+      timeRemaining -= 10;
+    } else {
+      timeRemaining = 0;
+    }
     updateTimeRemainingEl();
   }
 }
@@ -101,9 +113,61 @@ function updateAnswersUi() {
 
 // function to end the game
 function endGame() {
-  questionEL.textContent = 'You finished the quiz!';
+  questionEL.textContent = 'You finished the quiz! Your final score is ' + timeRemaining;
   answersEl.classList.add('hide');
+  timerEl.classList.add('hide');
+  scoresFormEl.classList.add('show');
 }
 
-// event listener to run the startQuiz function when the start quiz button is clicked
+// empty highScores array being created from localstorage
+var highScores = JSON.parse(localStorage.getItem('highScores'));
+
+if (!highScores) {
+  highScores = [];
+}
+// function to submit score to the highscores leaderboard once entered initials clicked the "submit score" button
+function submitScore(event) {
+  event.preventDefault();
+  if (!initialsInput.value) {
+    alert('Please enter your initials');
+    return;
+  }
+  questionEL.textContent = '';
+  scoresFormEl.classList.remove('show');
+  var userScore = {
+    userInitials: initialsInput.value,
+    score: timeRemaining,
+  };
+
+  highScores.push(userScore);
+  localStorage.setItem('highScores', JSON.stringify(highScores));
+}
+
+function showHighScores() {
+  highScoresCont.classList.remove('hide');
+  highScoresCont.innerHTML = '';
+  function scoreSorting(a, b) {
+    return b.score - a.score;
+  }
+  highScores.sort(scoreSorting);
+  var orderedList = document.createElement('ol');
+  for (var i = 0; i < highScores.length && i < 10; i++) {
+    var listItem = document.createElement('li');
+    listItem.textContent = createHighScoreString(highScores[i]);
+    orderedList.append(listItem);
+  }
+  highScoresCont.append(orderedList);
+}
+
+// function that takes the userScore object and returns a string
+function createHighScoreString(highScore) {
+  return highScore.userInitials + '-------------' + highScore.score;
+}
+// event listener to run the startQuiz function when the button is clicked
 startQuizBtnEl.addEventListener('click', startQuiz);
+// event listener to run the nextQuestion function when an answer is clicked
+answersEl.addEventListener('click', nextQuestion);
+// event listener to run the submitScore function when the button is clicked
+submitScoreBtnEl.addEventListener('click', submitScore);
+// event listener to run the showHighScores function when the link is clicked
+highScoresLinkEl.addEventListener('click', showHighScores);
