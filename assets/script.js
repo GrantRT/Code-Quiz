@@ -68,6 +68,7 @@ function startTimer() {
 // this function begins the quiz and starts the timer at the click of the button
 function startQuiz() {
   startQuizBtnEl.classList.add('hide');
+  timerEl.classList.remove('hide');
   updateTimeRemainingEl();
   startTimer();
   nextQuestion();

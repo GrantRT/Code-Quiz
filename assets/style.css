@@ -83,6 +83,7 @@ button {
   border-radius: 3px;
   padding: 3px;
   font-family: inherit;
+  margin: 5px;
 }
 
 button:hover {
@@ -172,4 +173,8 @@ hr {
   bottom: 50px;
   left: 0;
   right: 0;
+}
+
+#scoresform {
+  max-width: 5%;
 }
