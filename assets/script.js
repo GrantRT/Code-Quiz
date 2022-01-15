@@ -164,6 +164,7 @@ function showHighScores() {
   timeRemainingEl.innerHTML = '';
   answersEl.innerHTML = '';
   questionEL.innerHTML = '';
+  highScoresLinkEl.classList.add('hide');
   startQuizBtnEl.classList.add('hide');
   backToStartEl.classList.remove('hide');
   clearHighscoresEl.classList.remove('hide');
