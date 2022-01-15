@@ -17,12 +17,14 @@
       <h1>Code Quiz</h1>
     </header>
 
-    <div id="container">
+    <!-- the main container which contains the questions and answers for the quiz -->
+    <div id="container" class="greenBorder">
       <div id="question">
         Try to answer the upcoming questions as quickly as you can to achieve the highest score.<br />
-        Be careful though as incorrect answers remove 10 seconds off of the timer and will therefore reduce your score.<br /><br />Good luck!
+        Be careful though, as incorrect answers remove 10 seconds off of the timer and will therefore reduce your score.<br /><br />Good luck!
       </div>
       <div id="answers"></div>
+      <hr />
       <br />
       <br />
       <button id="startQuizBtn">Click to begin</button>
@@ -31,7 +33,11 @@
         <input type="text" id="initials" />
         <button id="submitScoreBtn">Submit score</button>
       </form>
+      <p id="correct" class="hide">The last answer was CORRECT!</p>
+      <p id="incorrect" class="hide">The last answer was...INCORRECT!</p>
     </div>
+
+    <!-- the container for the highscores -->
     <div id="highscoresContainer" class="hide"></div>
     <div id="refreshAndClearBtns">
       <button id="refreshBtn" class="hide" onClick="window.location.href=window.location.href">Back to start</button>

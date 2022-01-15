@@ -11,6 +11,8 @@ var highScoresCont = document.getElementById('highscoresContainer');
 var backToStartEl = document.getElementById('refreshBtn');
 var clearHighscoresEl = document.getElementById('clearBtn');
 var containerEl = document.getElementById('container');
+var correctEl = document.getElementById('correct');
+var incorrectEl = document.getElementById('incorrect');
 
 var questions = [
   {
@@ -29,7 +31,7 @@ var questions = [
     correctAnswer: 'all of the above',
   },
   {
-    question: 'String values must be enclosed within ____ when being assinged to variables.',
+    question: 'String values must be enclosed within ____ when being assigned to variables.',
     answers: ['curly brackets', 'quotes', 'parenthesis', 'commas'],
     correctAnswer: 'quotes',
   },
@@ -82,6 +84,11 @@ function checkAnswer(userAnswer) {
       timeRemaining = 0;
     }
     updateTimeRemainingEl();
+    incorrectEl.classList.remove('hide');
+    correctEl.classList.add('hide');
+  } else {
+    incorrectEl.classList.add('hide');
+    correctEl.classList.remove('hide');
   }
 }
 
@@ -120,9 +127,11 @@ function endGame() {
   answersEl.classList.add('hide');
   timerEl.classList.add('hide');
   scoresFormEl.classList.add('show');
+  correctEl.classList.add('hide');
+  incorrectEl.classList.add('hide');
 }
 
-// empty highScores array being created from localstorage
+// creating an empty highScores array from localstorage if the user has no highscores stored
 var highScores = JSON.parse(localStorage.getItem('highScores'));
 
 if (!highScores) {
@@ -183,7 +192,7 @@ function clearHighScores() {
 
 // function that takes the userScore object and returns a string
 function createHighScoreString(highScore) {
-  return highScore.userInitials + '-------------' + highScore.score;
+  return highScore.userInitials.trim() + ' ------------- ' + highScore.score;
 }
 
 // event listener to run the startQuiz function when the button is clicked
